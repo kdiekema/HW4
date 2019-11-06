@@ -1,6 +1,29 @@
 {%extends 'base.html' %}
 
 {% block body %}
-  <h2> server </h2>
+  <h2> Karina's Pets </h2>
+  {% if pets %}
+  <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Pet Name</th>
+                <th>Pet Type</th>
+                <th>Pet Age </th>
+            </tr>
+        </thead>
 
-{% endblock %}  
+        <tbody>
+            {% for row in pets %}
+            <tr>
+                <td> {{ row.petID }}</td>
+                <td> {{ row.petName }}</td>
+                <td> {{ row.petType }}</td>
+                <td> {{ row.age }}</td>
+
+                    <td>
+            {% endfor %}
+            </tbody>
+        </table>
+{% endif %}
+{% endblock %}
