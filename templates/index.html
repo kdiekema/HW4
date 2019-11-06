@@ -2,6 +2,7 @@
 
 {% block body %}
   <h2> Karina's Pets </h2>
+  <p> <a href="{{url_for('.add_pet')}}"> Add a new pet</a>
   {% if pets %}
   <table>
         <thead>
@@ -20,8 +21,13 @@
                 <td> {{ row.petName }}</td>
                 <td> {{ row.petType }}</td>
                 <td> {{ row.age }}</td>
-
-                    <td>
+                <td>
+    <td>
+      <form action="/delete_pet/{{ row.petID }}" method="POST">
+        <input type="submit" value="Delete" class="btn btn-danger" />
+      </form>
+                    </td>
+                      </tr>
             {% endfor %}
             </tbody>
         </table>

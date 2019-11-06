@@ -41,9 +41,22 @@ def add_pet():
         pet = kdiekema_petsapp(petName=form.petName.data, petType=form.petType.data, age= form.age.data)
         db.session.add(pet)
         db.session.commit()
-        return "<h2> My pet's name is {0}".format(form.petName.data)
+        return redirect('/')
 
     return render_template('add_pet.html', form=form, pageTitle='Add Pet')
+
+@app.route('/delete_pet/<int:petID>', methods=['GET','POST'])
+def delete_pet(petID):
+    if request.method == 'POST': #if it's a POST request, delete the friend from the database
+        obj = kdiekema_petsapp.query.filter_by(petID=petID).first()
+        db.session.delete(obj)
+        db.session.commit()
+        flash('Pet was successfully deleted!')
+        return redirect("/")
+
+    else: #if it's a GET request, send them to the home page
+        return redirect("/")
+
 
 if __name__ == '__main__':
     app.run(debug==True)
