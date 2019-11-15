@@ -1,0 +1,23 @@
+{%extends 'base.html' %}
+
+{% block body %}
+
+  <p><a href="{{url_for('index')}}"> Home </a></p>
+  <h3>{{ legend}}</h3>
+
+{% if form %}
+  <form method ="POST" action="">
+
+    {{ form.csrf_token }}
+    {{ form.petID.label }} {{ form.petID (size=5, readonly=true) }}
+    {{ form.petName.label }} {{ form.petName (size=20) }}
+    {{ form.petType.label }} {{ form.petType (size=20) }}
+    {{ form.age.label }} {{ form.age (size=20) }}
+
+  <input type="submit" value="Save">
+
+  </form>
+
+  {% endif %}
+
+{% endblock %}

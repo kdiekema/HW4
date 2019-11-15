@@ -3,29 +3,34 @@
 {% block body %}
   <h2> Karina's Pets </h2>
   <p> <a href="{{url_for('.add_pet')}}"> Add a new pet</a>
+
+  <form method="POST">
+    <input type="text" autofocus="autofocus" name = "search_string">
+    <input type="submit" formaction = "/search" value="Search">
+  </form>
+
   {% if pets %}
   <table>
         <thead>
             <tr>
-                <th>ID</th>
+
                 <th>Pet Name</th>
                 <th>Pet Type</th>
-                <th>Pet Age </th>
+
             </tr>
         </thead>
 
         <tbody>
             {% for row in pets %}
             <tr>
-                <td> {{ row.petID }}</td>
+
                 <td> {{ row.petName }}</td>
                 <td> {{ row.petType }}</td>
-                <td> {{ row.age }}</td>
-                <td>
+
     <td>
-      <form action="/delete_pet/{{ row.petID }}" method="POST">
-        <input type="submit" value="Delete" class="btn btn-danger" />
-      </form>
+      <form action="{{ url_for('pet', petID=row.petID) }}" method="POST">
+                 <input type="submit" value="Details" class="btn btn-info" />
+               </form>
                     </td>
                       </tr>
             {% endfor %}
